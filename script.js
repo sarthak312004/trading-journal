@@ -8,14 +8,13 @@ Many beginner traders record trades inconsistently and
 struggle to analyze their performance over time.
 Without proper records, it becomes difficult to identify
 winning patterns, common mistakes, profitability,
-and overall trading progress.
+and overall trading progress
 
 This project aims to build a Trading Journal system
 that stores trade information and provides detailed
 performance analysis using JavaScript.
 
 ---------------------------------------------------------
-
 PROJECT GOALS:
 
 1. Store trade details efficiently using arrays and objects.
@@ -55,7 +54,6 @@ PROJECT GOALS:
    - Stock Name
 
 ---------------------------------------------------------
-
 LEARNING OBJECTIVES:
 
 - Variables and Data Types
@@ -71,6 +69,21 @@ LEARNING OBJECTIVES:
 - Searching Algorithms
 - Sorting Techniques
 - Data Analysis Logic
-
 =========================================================
 */
+
+console.log("starting here");
+
+function information(name, age, winrate){
+   const person = {
+      personName : name,
+      personAge : age,
+      winRate : winrate
+   }
+   console.log("name of the person:",person.personName);
+   console.log("age of the person:",person.personAge);
+   console.log("Win rate:",person.winRate);
+
+}
+
+information("sarthak mahamuni", 21, 65)
