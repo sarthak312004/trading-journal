@@ -142,3 +142,87 @@ form .row-6 input:last-child {
     background-color: rgba(34, 188, 34, 0.445);
 }
 
+/* ── TABLET (≤ 768px) ───────────────────── */
+@media (max-width:1131px){
+  .row-2{
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width:853px){
+  .row-3{
+    flex-wrap: wrap;
+  }
+  main form{
+    row-gap: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  body {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  main {
+    padding: 16px 0;
+    align-items: flex-start;
+  }
+
+  .navbar h1 { font-size: 1.4rem; }
+
+  main form {
+    width: 92vw;
+    height: auto;
+    grid-template-rows: repeat(7, auto);
+    gap: 10px;
+    padding: 16px;
+  }
+
+  form .row-1 { flex-direction: column;
+                row-gap: 10px; }
+
+  form input, select { width: 100%; }
+
+  .row-2, .row-3, .row-4, .row-5 {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  form textarea { width: 100%; }
+}
+
+/* ── MOBILE (≤ 480px) ───────────────────── */
+
+
+@media (max-width: 480px) {
+  body { grid-template-rows: 50px 1fr 36px; }
+
+  .navbar h1 { font-size: 1.1rem; }
+
+  main form {
+    width: 95vw;
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  form input, select {
+    height: 44px;
+    border-radius: 14px;
+    font-size: 0.85rem;
+  }
+
+  form textarea {
+    height: 60px;
+    border-radius: 14px;
+    padding-left: 14px;
+    font-size: 0.85rem;
+  }
+
+  form .row-6 input:first-child,
+  form .row-6 input:last-child {
+    width: 90px;
+    height: 36px;
+  }
+}
