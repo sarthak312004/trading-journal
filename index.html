@@ -8,6 +8,27 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <h1>Trade journal UI</h1>
+    <nav class="navbar">
+        <h1>TradeX</h1>
+    </nav>
+
+    <main>
+    <form action="">
+        <h3>/ Add Trade</h3>
+        <input type="date" name="date" id="select-date">
+        <select name="asset-type" id="select-asset">
+            <option value="" hidden>Select Asset</option>
+            <option value="equity">Equity</option>
+            <option value="commodity">Commodity</option>
+            <option value="crypto">Cypto</option>
+            <option value="futures">Futures</option>
+            <option value="forex">Forex</option>
+        </select>
+    </form>
+    </main>
+
+    <footer>
+        <p>Trade Journal and Analyser</p>
+    </footer>
 </body>
 </html>
