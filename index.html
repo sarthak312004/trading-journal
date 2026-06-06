@@ -1,34 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trade journal</title>
+    <title>Trade-Commit</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
+
 <body>
     <nav class="navbar">
-        <h1>TradeX</h1>
+        <h1>Trade Commit</h1>
     </nav>
 
     <main>
-    <form action="">
-        <h3>/ Add Trade</h3>
-        <input type="date" name="date" id="select-date">
-        <select name="asset-type" id="select-asset">
-            <option value="" hidden>Select Asset</option>
-            <option value="equity">Equity</option>
-            <option value="commodity">Commodity</option>
-            <option value="crypto">Cypto</option>
-            <option value="futures">Futures</option>
-            <option value="forex">Forex</option>
-        </select>
-    </form>
+        <form action="">
+            <h3>/ Add Trade</h3>
+            <div class="row-1">
+                 <input type="date" name="date" id="select-date" required>
+
+                <select name="asset-type" id="select-asset" required>
+                    <option value="" hidden>Select Asset</option>
+                    <option value="equity">Equity</option>
+                    <option value="commodity">Commodity</option>
+                    <option value="crypto">Cypto</option>
+                    <option value="futures">Futures</option>
+                    <option value="forex">Forex</option>
+                </select>
+            </div>
+            <div class="row-2">
+                <select name="style-type" id="select-style" required>
+                    <option value="" hidden>Select style</option>
+                    <option value="Swing">Swing</option>
+                    <option value="Intraday">Intraday</option>
+                    <option value="positional">positional</option>
+                    <option value="Scalping">Scalping</option>
+                </select>
+                <select name="timeframe" id="select-TF" required>
+                    <option value="" hidden>Select Time frame</option>
+                    <option value="W">W</option>
+                    <option value="D">D</option>
+                    <option value="4hr">4hr</option>
+                    <option value="1hr">1hr</option>
+                    <option value="15m">15m</option>
+                    <option value="5m">5m</option>
+                    <option value="1m">1m</option>
+                </select>
+                <input type="text" name="asset-name" id="select-asset-name" placeholder="Asset Name" required>
+                <select name="direction" id="select-direction" required>
+                    <option value="" hidden>Direction</option>
+                    <option value="long">long</option>
+                    <option value="short">short</option>
+                    <option value="hedging">hedging</option>
+                </select>
+                
+            </div>
+
+            <div class="row-3">
+                <input type="text" name="entryprice" id="entry-price" placeholder="Entry Price" required>
+                <input type="text" name="exitprice" id="exit-price" placeholder="Exit Price" required>
+                <input type="Number" name="quantity" id="enter-qnt" placeholder="Quantity" required>
+
+            </div>
+            <div class="row-4">
+                <textarea name="context" id="add-context" rows="" cols="" placeholder="Trade Context"required></textarea>
+            </div>
+            <div class="row-5">
+                <label for="file-upload">Upload Screenshot</label>
+                <input type="file" id="file-upload" name="uploaded-file">
+            </div>
+
+            <div class="row-6">
+                <input type="submit" value="Add Trade">
+                <input type="reset" name="" id="reset-form" value="Reset">
+            </div>
+        
+
+        </form>
     </main>
 
     <footer>
-        <p>Trade Journal and Analyser</p>
+        <p>Log with discipline</p>
     </footer>
 </body>
+
 </html>
