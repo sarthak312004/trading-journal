@@ -114,8 +114,8 @@ form textarea {
   box-sizing: border-box;
 }
 
-form .row-6{
-    justify-content: center;
+form .row-6 {
+  justify-content: center;
 }
 form .row-6 input:first-child {
   background-color: rgba(34, 244, 34, 0.445);
@@ -135,25 +135,25 @@ form .row-6 input:last-child {
   font-weight: 500;
   border: none;
 }
-.row-6 input:last-child:hover{
-    background-color: rgb(189, 142, 61);
+.row-6 input:last-child:hover {
+  background-color: rgb(189, 142, 61);
 }
-.row-6 input:first-child:hover{
-    background-color: rgba(34, 188, 34, 0.445);
+.row-6 input:first-child:hover {
+  background-color: rgba(34, 188, 34, 0.445);
 }
 
 /* ── TABLET (≤ 768px) ───────────────────── */
-@media (max-width:1131px){
-  .row-2{
+@media (max-width: 1131px) {
+  .row-2 {
     flex-wrap: wrap;
   }
 }
 
-@media (max-width:853px){
-  .row-3{
+@media (max-width: 853px) {
+  .row-3 {
     flex-wrap: wrap;
   }
-  main form{
+  main form {
     row-gap: 10px;
   }
 }
@@ -169,7 +169,9 @@ form .row-6 input:last-child {
     align-items: flex-start;
   }
 
-  .navbar h1 { font-size: 1.4rem; }
+  .navbar h1 {
+    font-size: 1.4rem;
+  }
 
   main form {
     width: 92vw;
@@ -179,27 +181,40 @@ form .row-6 input:last-child {
     padding: 16px;
   }
 
-  form .row-1 { flex-direction: column;
-                row-gap: 10px; }
+  form .row-1 {
+    flex-direction: column;
+    row-gap: 10px;
+  }
 
-  form input, select { width: 100%; }
+  form input,
+  select {
+    width: 100%;
+  }
 
-  .row-2, .row-3, .row-4, .row-5 {
+  .row-2,
+  .row-3,
+  .row-4,
+  .row-5 {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
 
-  form textarea { width: 100%; }
+  form textarea {
+    width: 100%;
+  }
 }
 
 /* ── MOBILE (≤ 480px) ───────────────────── */
 
-
 @media (max-width: 480px) {
-  body { grid-template-rows: 50px 1fr 36px; }
+  body {
+    grid-template-rows: 50px 1fr 36px;
+  }
 
-  .navbar h1 { font-size: 1.1rem; }
+  .navbar h1 {
+    font-size: 1.1rem;
+  }
 
   main form {
     width: 95vw;
@@ -207,7 +222,8 @@ form .row-6 input:last-child {
     border-radius: 14px;
   }
 
-  form input, select {
+  form input,
+  select {
     height: 44px;
     border-radius: 14px;
     font-size: 0.85rem;
