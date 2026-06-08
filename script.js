@@ -72,42 +72,77 @@ LEARNING OBJECTIVES:
 =========================================================
 */
 
-
 // adding trades
-const trades = [];
+const trades = [
+  {
+    date: "2026-8-6",
+    asset: "Equity",
+    style: "swing",
+    timeFrame: "4hr",
+    assetName: "HDFC",
+    direction: "Long",
+    entryPrice: "1400",
+    exitPrice: "1500",
+    quantity: "10",
+    context: "Demo trade 1",
+    screenshot: "",
+  },
+  {
+    date: "2026-12-6",
+    asset: "Commodities",
+    style: "Intraday",
+    timeFrame: "15",
+    assetName: "GOLD",
+    direction: "Short",
+    entryPrice: "2700",
+    exitPrice: "2680",
+    quantity: "1",
+    context: "Demo trade 2",
+    screenshot: "",
+  },
+];
 
-const addTrade = () => {  
-   const tradeInfo = {
-      date : document.querySelector('#select-date').value,
-      asset : document.querySelector('#select-asset').value,
-      style : document.querySelector('#select-style').value,
-      timeFrame : document.querySelector('#select-TF').value,
-      assetName : document.querySelector('#select-asset-name').value,
-      direction : document.querySelector('#select-direction').value,
-      entryPrice : document.querySelector('#entry-price').value,
-      exitPrice : document.querySelector('#exit-price').value,
-      quantity : document.querySelector('#enter-qnt').value,
-      context : document.querySelector('#add-context').value,
-      screenshot : document.querySelector('#file-upload').files[0]
-   }
-   // console.log(tradeInfo);
+const addTrade = () => {
+  const tradeInfo = {
+    date: document.querySelector("#select-date").value,
+    asset: document.querySelector("#select-asset").value,
+    style: document.querySelector("#select-style").value,
+    timeFrame: document.querySelector("#select-TF").value,
+    assetName: document.querySelector("#select-asset-name").value,
+    direction: document.querySelector("#select-direction").value,
+    entryPrice: document.querySelector("#entry-price").value,
+    exitPrice: document.querySelector("#exit-price").value,
+    quantity: document.querySelector("#enter-qnt").value,
+    context: document.querySelector("#add-context").value,
+    screenshot: document.querySelector("#file-upload").files[0],
+  };
+  // console.log(tradeInfo);
 
-   trades.push(tradeInfo)
-   console.log(trades);
-   
-   alert("Trade added successfully")
-   
-}
+  trades.push(tradeInfo);
+  console.log(trades);
+};
 
 
 
+//------------------find trades by Date
 
+const findTrade = (...date) => {
+  const findByDate = trades.reduce((acc, val) => {
+    for (let tradeDate of date) {
+      if (val.date === tradeDate) {
+        acc.push(val);
+      } 
+    }
+    return acc;
+  }, []);
 
-
-
-
-
-
+  if (findByDate.length == 0) {
+    return "Trade Not Found !";
+  } else {
+    return findByDate;
+  }
+};
+console.log(findTrade("2026-8-6","2026-12-6"));
 
 
 
@@ -125,7 +160,7 @@ const addTrade = () => {
 //          console.log("trade updated !");
 //          console.log(trades[i]);
 //       }
-//    }  
+//    }
 // }
 
 // updateTrade({stockName:"HDFC",date:"5/6/26", entryPrice:1500, target:1700})
