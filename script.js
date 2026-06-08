@@ -121,15 +121,15 @@ const addTrade = () => {
 const impInputs = ["date", "assetName", "direction" ,"entryPrice" ,"exitPrice" ,"quantity" ]
 let emptyInputs = []
   if (
-    (tradeInfo.date &&
+     !(tradeInfo.date &&
       tradeInfo.assetName &&
       tradeInfo.direction &&
       tradeInfo.entryPrice &&
       tradeInfo.exitPrice &&
-      tradeInfo.quantity) == false
+      tradeInfo.quantity)
   ) {
-    for(let inputKey of impInputs){
-      if(!tradeInfo[inputKey]){
+    for (let inputKey of impInputs){
+      if (!tradeInfo[inputKey]){
          emptyInputs.push(inputKey)
       }
     }
@@ -138,10 +138,11 @@ let emptyInputs = []
      else {
     trades.push(tradeInfo);
   }
-  
 //   console.log(emptyInputs);
-//   console.log(trades);
+  console.log(trades);
 };
+
+
 
 //------------------find trades by Date
 
