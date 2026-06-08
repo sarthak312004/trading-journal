@@ -118,11 +118,30 @@ const addTrade = () => {
   };
   // console.log(tradeInfo);
 
-  trades.push(tradeInfo);
-  console.log(trades);
+const impInputs = ["date", "assetName", "direction" ,"entryPrice" ,"exitPrice" ,"quantity" ]
+let emptyInputs = []
+  if (
+    (tradeInfo.date &&
+      tradeInfo.assetName &&
+      tradeInfo.direction &&
+      tradeInfo.entryPrice &&
+      tradeInfo.exitPrice &&
+      tradeInfo.quantity) == false
+  ) {
+    for(let inputKey of impInputs){
+      if(!tradeInfo[inputKey]){
+         emptyInputs.push(inputKey)
+      }
+    }
+     alert(`Enter :${emptyInputs}`)
+    }
+     else {
+    trades.push(tradeInfo);
+  }
+  
+//   console.log(emptyInputs);
+//   console.log(trades);
 };
-
-
 
 //------------------find trades by Date
 
@@ -131,7 +150,7 @@ const findTrade = (...date) => {
     for (let tradeDate of date) {
       if (val.date === tradeDate) {
         acc.push(val);
-      } 
+      }
     }
     return acc;
   }, []);
@@ -142,10 +161,7 @@ const findTrade = (...date) => {
     return findByDate;
   }
 };
-console.log(findTrade("2026-8-6","2026-12-6"));
-
-
-
+console.log(findTrade("2026-8-6", "2026-12-6"));
 
 // updating trades
 
