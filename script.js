@@ -72,9 +72,14 @@ LEARNING OBJECTIVES:
 =========================================================
 */
 
+console.log("To diplay all trade: display()");
+console.log("To search trade: findTrade('YYYY-DD-MM',)");
+console.log("To delete trade: deleteTrade('YYYY-DD-MM','id')");
+
 // adding trades
 const trades = [
   {
+    id: "1",
     date: "2026-8-6",
     asset: "Equity",
     style: "swing",
@@ -88,6 +93,7 @@ const trades = [
     screenshot: "",
   },
   {
+    id: "2",
     date: "2026-12-6",
     asset: "Commodities",
     style: "Intraday",
@@ -118,33 +124,60 @@ const addTrade = () => {
   };
   // console.log(tradeInfo);
 
-const impInputs = ["date", "assetName", "direction" ,"entryPrice" ,"exitPrice" ,"quantity" ]
-let emptyInputs = []
+  // >>>>>>>> giving unique ID
+  if (trades.length != 0) {
+    const preTrade = trades.length - 1;
+    tradeInfo.id = parseInt(trades[preTrade].id) + 1;
+  } else {
+    tradeInfo.id = 1;
+  }
+
+  // >>>>>>>>input validation
+  const impInputs = [
+    "date",
+    "assetName",
+    "direction",
+    "entryPrice",
+    "exitPrice",
+    "quantity",
+  ];
+  let emptyInputs = [];
   if (
-     !(tradeInfo.date &&
+    !(
+      tradeInfo.date &&
       tradeInfo.assetName &&
       tradeInfo.direction &&
       tradeInfo.entryPrice &&
       tradeInfo.exitPrice &&
-      tradeInfo.quantity)
+      tradeInfo.quantity
+    )
   ) {
-    for (let inputKey of impInputs){
-      if (!tradeInfo[inputKey]){
-         emptyInputs.push(inputKey)
+    for (let inputKey of impInputs) {
+      if (!tradeInfo[inputKey]) {
+        emptyInputs.push(inputKey);
       }
     }
-     alert(`Enter :${emptyInputs}`)
-    }
-     else {
+    alert(`Enter :${emptyInputs}`);
+  } else {
+    console.log("Trade Added Successfully !");
     trades.push(tradeInfo);
   }
-//   console.log(emptyInputs);
-  console.log(trades);
+
+  //console.log(emptyInputs);
+  // console.log(trades);
 };
 
+// -----------------display all existing trades
+function display() {
+  for (let obj of trades) {
+    for (let [key, value] of Object.entries(obj)) {
+      console.log(`${key}:${value}`);
+    }
+    console.log("---------------------------------------");
+  }
+}
 
-
-//------------------find trades by Date
+//-----------------------find trades by Date
 
 const findTrade = (...date) => {
   const findByDate = trades.reduce((acc, val) => {
@@ -159,26 +192,38 @@ const findTrade = (...date) => {
   if (findByDate.length == 0) {
     return "Trade Not Found !";
   } else {
-    return findByDate;
+    for (let obj of findByDate) {
+      for (let [key, value] of Object.entries(obj)) {
+        console.log(`${key}:${value}`);
+      }
+      console.log("-------------------------------------");
+    }
   }
 };
-console.log(findTrade("2026-8-6", "2026-12-6"));
 
-// updating trades
+//------------------------deleting trade
 
-// const updateTrade = (trade) => {
-//    for(let i = 0; i<trades.length; i++){
-
-//       if(trade.stockName == trades[i].stockName && trade.date == trades[i].date){
-//          // console.log("trade found");
-//          for(let [key,value] of Object.entries(trade)){
-//             trades[i][key] = value
-//          }
-//          console.log("trade updated !");
-//          console.log(trades[i]);
-//       }
-//    }
-// }
-
-// updateTrade({stockName:"HDFC",date:"5/6/26", entryPrice:1500, target:1700})
-// updateTrade({stockName:"SBI", date:"1/6/26", entryReason:"price is at oversold area, and selling exhaustion is visible, took a trade on bullish momentum with resistance breakout"})
+const deleteTrade = (date, id) => {
+let counter = 0
+let deletedTrades = []
+  for (let key = trades.length - 1; key >= 0; key--) {
+    if ((date && !id) && (trades[key].date == date)) {
+        // console.log("true condition 1",trades[key].id);
+        deletedTrades.push(trades.splice(key, 1));
+        counter++
+      
+    } else if ((date && id) && ((trades[key].date == date) && (trades[key].id == id))) {
+        //  console.log("true condition 2");
+        deletedTrades.push(trades.splice(key, 1));
+        counter++
+    }
+  }
+  if(counter){
+    console.log("Trade deleted successfully !",deletedTrades);
+  }else{
+    console.log("Trade not found !");
+  }
+  
+};
+// deleteTrade("2026-12-6")
+// deleteTrade("2026-8-6")
