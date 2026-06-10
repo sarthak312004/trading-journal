@@ -75,6 +75,7 @@ LEARNING OBJECTIVES:
 console.log("To diplay all trade: display()");
 console.log("To search trade: findTrade('YYYY-DD-MM',)");
 console.log("To delete trade: deleteTrade('YYYY-DD-MM','id')");
+console.log("To update trade: updateTrade({id:'', attributes:'value'})");
 
 // adding trades
 const trades = [
@@ -159,8 +160,9 @@ const addTrade = () => {
     }
     alert(`Enter :${emptyInputs}`);
   } else {
-    console.log("Trade Added Successfully !");
+    alert("Trade Added Successfully !");
     trades.push(tradeInfo);
+    document.querySelector('form').reset()
   }
 
   //console.log(emptyInputs);
@@ -204,26 +206,49 @@ const findTrade = (...date) => {
 //------------------------deleting trade
 
 const deleteTrade = (date, id) => {
-let counter = 0
-let deletedTrades = []
+  let counter = 0;
+  let deletedTrades = [];
   for (let key = trades.length - 1; key >= 0; key--) {
-    if ((date && !id) && (trades[key].date == date)) {
-        // console.log("true condition 1",trades[key].id);
-        deletedTrades.push(trades.splice(key, 1));
-        counter++
-      
-    } else if ((date && id) && ((trades[key].date == date) && (trades[key].id == id))) {
-        //  console.log("true condition 2");
-        deletedTrades.push(trades.splice(key, 1));
-        counter++
+    if (date && !id && trades[key].date == date) {
+      // console.log("true condition 1",trades[key].id);
+      deletedTrades.push(trades.splice(key, 1));
+      counter++;
+    } else if (date && id && trades[key].date == date && trades[key].id == id) {
+      //  console.log("true condition 2");
+      deletedTrades.push(trades.splice(key, 1));
+      counter++;
     }
   }
-  if(counter){
-    console.log("Trade deleted successfully !",deletedTrades);
-  }else{
+  if (counter) {
+    console.log("Trade deleted successfully !", deletedTrades);
+  } else {
     console.log("Trade not found !");
   }
-  
 };
 // deleteTrade("2026-12-6")
 // deleteTrade("2026-8-6")
+
+
+// ------------------------Update existing trades
+const updateTrade = (trade) => {
+  let isExist = false
+  if (trade.id) {
+    for (let obj of trades) {    
+      if(obj.id == trade.id){
+        isExist = true
+        for(let [key,value] of Object.entries(trade)){
+          obj[key] = value
+        }
+      }
+    }
+  }else{
+    console.log("Enter trade id");
+  }
+  if(isExist){
+    console.log("Trade updated successfully !");
+  }else{
+    console.log("Give Id does not exist !");
+  }
+};
+// updateTrade({ id:1, assetName:"Mahindra Motors", asset:"Equity", entryPrice:1780, exitPrice:2000 });
+
