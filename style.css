@@ -27,8 +27,9 @@ body {
 }
 main {
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  justify-items: center;
   background: linear-gradient(to bottom, #525252 0%, #323232 50%, #171717 100%);
   align-items: center;
 }
@@ -42,7 +43,7 @@ footer {
 }
 
 main form {
-  width: 80vw;
+  width: 700px;
   height: 90%;
   box-sizing: border-box;
   border-radius: 20px;
@@ -53,6 +54,7 @@ main form {
   display: grid;
   grid-template-rows: repeat(7, 1fr);
   align-items: center;
+  row-gap: 10px;
 }
 form h3 {
   margin: 0;
@@ -61,7 +63,9 @@ form h3 {
 }
 form .row-1 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
 }
 form input,
 select {
@@ -74,7 +78,6 @@ select {
   text-align: center;
   box-sizing: border-box;
 }
-
 .row-2,
 .row-3,
 .row-4,
@@ -84,7 +87,6 @@ select {
   align-items: center;
   gap: 20px;
 }
-
 input::placeholder {
   color: #050505;
   opacity: 1;
@@ -92,10 +94,9 @@ input::placeholder {
 textarea::placeholder {
   color: #050505;
 }
-
 form textarea {
   height: 70px;
-  width: 60%;
+  width: 420px;
   background-color: #c1c1c1a9;
   border: 1px solid rgb(155, 172, 191);
   border-radius: 20px;
@@ -113,7 +114,6 @@ form textarea {
   padding-left: none;
   box-sizing: border-box;
 }
-
 form .row-6 {
   justify-content: center;
 }
@@ -141,13 +141,60 @@ form .row-6 input:last-child {
 .row-6 input:first-child:hover {
   background-color: rgba(34, 188, 34, 0.445);
 }
+.analytics-tab {
+  height: 90%;
+  width: 400px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  box-shadow: 0px 2px 10px 1px rgb(62, 71, 73);
+  background-color: #0d0d0d67;
+  padding: 20px;
+  border: 1px solid rgb(104, 113, 123);
+  margin-right: 10%;
+  font-family: var(--def-heading-font-family);
+  display: flex;
+  flex-direction: column;
+}
+.analytics-heading{
+  flex-shrink: 0;
+}
+.analytics-info{
+  height: 450px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+.analytics-tab h3 {
+  margin: 0;
+  font-weight: 500;
+  color: whitesmoke;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; /* transparent track */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(194, 194, 194, 0.062); /* semi-transparent */
+  border-radius: 10px;
+}
 
-/* ── TABLET (≤ 768px) ───────────────────── */
-@media (max-width: 1131px) {
-  .row-2 {
-    flex-wrap: wrap;
+@media screen and (max-width: 1137px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 20px;
+  }
+  .analytics-tab {
+    margin-right: 0;
+    width: 700px;
   }
 }
+/* ── TABLET (≤ 768px) ───────────────────── */
 
 @media (max-width: 853px) {
   .row-3 {
@@ -155,6 +202,8 @@ form .row-6 input:last-child {
   }
   main form {
     row-gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
@@ -163,16 +212,13 @@ form .row-6 input:last-child {
     min-height: 100vh;
     height: auto;
   }
-
   main {
     padding: 16px 0;
     align-items: flex-start;
   }
-
   .navbar h1 {
     font-size: 1.4rem;
   }
-
   main form {
     width: 92vw;
     height: auto;
@@ -180,17 +226,20 @@ form .row-6 input:last-child {
     gap: 10px;
     padding: 16px;
   }
-
+  main .analytics-tab {
+    width: 92vw;
+  }
+  .analytics-tab .analytics-info{
+    height: 600px;
+  }
   form .row-1 {
     flex-direction: column;
     row-gap: 10px;
   }
-
   form input,
   select {
     width: 100%;
   }
-
   .row-2,
   .row-3,
   .row-4,
@@ -199,7 +248,6 @@ form .row-6 input:last-child {
     align-items: flex-start;
     gap: 8px;
   }
-
   form textarea {
     width: 100%;
   }
@@ -211,31 +259,26 @@ form .row-6 input:last-child {
   body {
     grid-template-rows: 50px 1fr 36px;
   }
-
   .navbar h1 {
     font-size: 1.1rem;
   }
-
   main form {
     width: 95vw;
     padding: 14px 12px;
     border-radius: 14px;
   }
-
   form input,
   select {
     height: 44px;
     border-radius: 14px;
     font-size: 0.85rem;
   }
-
   form textarea {
     height: 60px;
     border-radius: 14px;
     padding-left: 14px;
     font-size: 0.85rem;
   }
-
   form .row-6 input:first-child,
   form .row-6 input:last-child {
     width: 90px;
