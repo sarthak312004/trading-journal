@@ -126,7 +126,7 @@ form .row-6 input:first-child {
   font-weight: 500;
   border: none;
 }
-form .row-6 input:last-child {
+form .row-6 input:nth-child(2), .row-6 input:last-child{
   background-color: rgb(255, 191, 80);
   height: 40px;
   width: 100px;
@@ -135,8 +135,9 @@ form .row-6 input:last-child {
   font-weight: 500;
   border: none;
 }
-.row-6 input:last-child:hover {
-  background-color: rgb(189, 142, 61);
+
+.row-6 input:nth-child(2):hover, .row-6 input:last-child:hover {
+  background-color: rgba(189, 142, 61, 0.934);
 }
 .row-6 input:first-child:hover {
   background-color: rgba(34, 188, 34, 0.445);
@@ -155,10 +156,23 @@ form .row-6 input:last-child {
   display: flex;
   flex-direction: column;
 }
-.analytics-heading{
+.analytics-heading {
   flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-.analytics-info{
+#search-bar{
+  font-family: var(--def-heading-font-family);
+  background-color: rgba(245, 245, 245, 0.317);
+  border: none;
+  border-radius: 15px;
+  width:60%;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.analytics-info {
   height: 450px;
   width: 100%;
   display: flex;
@@ -166,11 +180,33 @@ form .row-6 input:last-child {
   overflow-y: auto;
   margin-top: 10px;
 }
+.analytics-info .trade-cards{
+  background-color: #d6edff21;
+  height: 70px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 10px;
+  box-sizing: border-box;
+}
 .analytics-tab h3 {
   margin: 0;
   font-weight: 500;
   color: whitesmoke;
 }
+
+.trade-options-btns button{
+  border: none;
+  border-radius: 5px;
+  padding: 3px 3px;
+  color: whitesmoke;
+}
+.trade-options-btns button:hover{
+  filter: opacity(0.8) !important;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
@@ -229,7 +265,7 @@ form .row-6 input:last-child {
   main .analytics-tab {
     width: 92vw;
   }
-  .analytics-tab .analytics-info{
+  .analytics-tab .analytics-info {
     height: 600px;
   }
   form .row-1 {

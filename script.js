@@ -87,7 +87,7 @@ const trades = [
     timeFrame: "4hr",
     assetName: "HDFC",
     direction: "Long",
-    entryPrice: "1400",
+    entryPrice: "1600",
     exitPrice: "1500",
     quantity: "10",
     context: "Demo trade 1",
@@ -99,11 +99,11 @@ const trades = [
     asset: "Commodities",
     style: "Intraday",
     timeFrame: "15",
-    assetName: "GOLD",
+    assetName: "XAUUSD",
     direction: "Short",
     entryPrice: "2700",
     exitPrice: "2680",
-    quantity: "1",
+    quantity: "50",
     context: "Demo trade 2",
     screenshot: "",
   },
@@ -162,7 +162,7 @@ const addTrade = () => {
   } else {
     alert("Trade Added Successfully !");
     trades.push(tradeInfo);
-    document.querySelector('form').reset()
+    document.querySelector("form").reset();
   }
 
   //console.log(emptyInputs);
@@ -173,10 +173,96 @@ const addTrade = () => {
 function display() {
   for (let obj of trades) {
     for (let [key, value] of Object.entries(obj)) {
-      console.log(`${key}:${value}`);
+      // console.log(`${key}:${value}`);
     }
-    console.log("---------------------------------------");
+    // console.log("---------------------------------------");
   }
+
+  document.querySelector(".analytics-heading h3").innerText = "/ Trades";
+  for (let node of document.querySelector(".analytics-info").children) {
+    node.remove();
+  }
+
+  trades.forEach((tradeObj, index) => {
+    const tradeCard = document.createElement("div");
+    tradeCard.className = "trade-cards";
+
+    const info = document.createElement("div");
+    info.className = "name-date";
+    info.style.height = "100%";
+    info.style.width = "100%";
+    info.style.display = "flex";
+    info.style.flexDirection = "column";
+
+    const assetName = document.createElement("p");
+    assetName.innerText = tradeObj.assetName;
+    assetName.style.margin = "0";
+    info.appendChild(assetName);
+    tradeCard.appendChild(info);
+
+
+    const tradeDate = document.createElement("p");
+    tradeDate.innerText = tradeObj.date;
+    tradeDate.style.margin = "0";
+    tradeDate.style.fontSize = "0.8rem";
+    info.appendChild(tradeDate);
+
+    const moreinfo = document.createElement("div");
+    moreinfo.className = "more-info";
+    moreinfo.style.height = "100%";
+    moreinfo.style.width = "100%";
+    moreinfo.style.display = "flex";
+    moreinfo.style.flexDirection = "column";
+
+    const tradeDirection = document.createElement("p");
+    tradeDirection.innerText = tradeObj.direction;
+    tradeDirection.style.margin = "0";
+    tradeDirection.style.fontSize = "0.8rem";
+    moreinfo.appendChild(tradeDirection);
+
+    const pnl = document.createElement("p");
+    pnl.style.margin = "0";
+    pnl.style.fontSize = "0.8rem";
+    const entry = Number(tradeObj.entryPrice);
+    const exit = Number(tradeObj.exitPrice);
+    const qty = Number(tradeObj.quantity);
+    
+    const pnlValue = tradeObj.direction === "Long"? (exit-entry)*qty : (entry-exit)*qty;
+    pnl.innerText = pnlValue
+    if(pnlValue >= 0){
+      pnl.style.color = "rgba(0, 255, 0, 0.75)"
+    }else{
+      pnl.style.color = "orange"
+    }
+    moreinfo.appendChild(pnl);
+    tradeCard.appendChild(moreinfo);
+
+
+    const tradeOptions = document.createElement('div')
+    tradeOptions.className = "trade-options-btns"
+    tradeOptions.style.height = "100%";
+    tradeOptions.style.width = "100%";
+    tradeOptions.style.display = "flex";
+    tradeOptions.style.flexDirection = "column";
+    tradeOptions.style.justifyContent = "space-between";
+
+    const editBnt = document.createElement('button')
+    editBnt.innerText = "Edit"
+    editBnt.style.backgroundColor = "#00eaff91"
+    tradeOptions.appendChild(editBnt)
+
+    const deleteBnt = document.createElement('button')
+    deleteBnt.innerText = "Delete"
+    deleteBnt.style.backgroundColor = "#f44036"
+
+    tradeOptions.appendChild(deleteBnt)
+    
+    tradeCard.appendChild(tradeOptions)
+
+  
+
+    document.querySelector(".analytics-info").appendChild(tradeCard);
+  });
 }
 
 //-----------------------find trades by Date
@@ -228,27 +314,25 @@ const deleteTrade = (date, id) => {
 // deleteTrade("2026-12-6")
 // deleteTrade("2026-8-6")
 
-
 // ------------------------Update existing trades
 const updateTrade = (trade) => {
-  let isExist = false
+  let isExist = false;
   if (trade.id) {
-    for (let obj of trades) {    
-      if(obj.id == trade.id){
-        isExist = true
-        for(let [key,value] of Object.entries(trade)){
-          obj[key] = value
+    for (let obj of trades) {
+      if (obj.id == trade.id) {
+        isExist = true;
+        for (let [key, value] of Object.entries(trade)) {
+          obj[key] = value;
         }
       }
     }
-  }else{
+  } else {
     console.log("Enter trade id");
   }
-  if(isExist){
+  if (isExist) {
     console.log("Trade updated successfully !");
-  }else{
+  } else {
     console.log("Give Id does not exist !");
   }
 };
 // updateTrade({ id:1, assetName:"Mahindra Motors", asset:"Equity", entryPrice:1780, exitPrice:2000 });
-
