@@ -162,14 +162,27 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   justify-content: space-between;
   margin-bottom: 10px;
 }
-#search-bar{
+#filter-date{
   font-family: var(--def-heading-font-family);
   background-color: rgba(245, 245, 245, 0.317);
   border: none;
   border-radius: 15px;
-  width:60%;
   font-size: 0.8rem;
   text-align: center;
+  width: 40%;
+}
+.analytics-heading button {
+  font-family: var(--def-heading-font-family);
+  background-color: rgba(245, 245, 245, 0.317);
+  border: none;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  text-align: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.analytics-heading button:hover{
+  background-color: rgba(245, 245, 245, 0.468);
 }
 
 .analytics-info {
@@ -190,6 +203,7 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   grid-template-columns: 2fr 1fr 1fr;
   padding: 10px;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 .analytics-tab h3 {
   margin: 0;

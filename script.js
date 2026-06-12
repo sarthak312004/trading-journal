@@ -81,9 +81,9 @@ console.log("To update trade: updateTrade({id:'', attributes:'value'})");
 const trades = [
   {
     id: "1",
-    date: "2026-8-6",
+    date: "2026-06-12",
     asset: "Equity",
-    style: "swing",
+    style: "Swing",
     timeFrame: "4hr",
     assetName: "HDFC",
     direction: "Long",
@@ -95,10 +95,10 @@ const trades = [
   },
   {
     id: "2",
-    date: "2026-12-6",
-    asset: "Commodities",
+    date: "2026-06-10",
+    asset: "Commodity",
     style: "Intraday",
-    timeFrame: "15",
+    timeFrame: "15m",
     assetName: "XAUUSD",
     direction: "Short",
     entryPrice: "2700",
@@ -178,114 +178,221 @@ function display() {
     // console.log("---------------------------------------");
   }
 
-  document.querySelector(".analytics-heading h3").innerText = "/ Trades";
-  for (let node of document.querySelector(".analytics-info").children) {
-    node.remove();
-  }
-
-  trades.forEach((tradeObj, index) => {
-    const tradeCard = document.createElement("div");
-    tradeCard.className = "trade-cards";
-
-    const info = document.createElement("div");
-    info.className = "name-date";
-    info.style.height = "100%";
-    info.style.width = "100%";
-    info.style.display = "flex";
-    info.style.flexDirection = "column";
-
-    const assetName = document.createElement("p");
-    assetName.innerText = tradeObj.assetName;
-    assetName.style.margin = "0";
-    info.appendChild(assetName);
-    tradeCard.appendChild(info);
-
-
-    const tradeDate = document.createElement("p");
-    tradeDate.innerText = tradeObj.date;
-    tradeDate.style.margin = "0";
-    tradeDate.style.fontSize = "0.8rem";
-    info.appendChild(tradeDate);
-
-    const moreinfo = document.createElement("div");
-    moreinfo.className = "more-info";
-    moreinfo.style.height = "100%";
-    moreinfo.style.width = "100%";
-    moreinfo.style.display = "flex";
-    moreinfo.style.flexDirection = "column";
-
-    const tradeDirection = document.createElement("p");
-    tradeDirection.innerText = tradeObj.direction;
-    tradeDirection.style.margin = "0";
-    tradeDirection.style.fontSize = "0.8rem";
-    moreinfo.appendChild(tradeDirection);
-
-    const pnl = document.createElement("p");
-    pnl.style.margin = "0";
-    pnl.style.fontSize = "0.8rem";
-    const entry = Number(tradeObj.entryPrice);
-    const exit = Number(tradeObj.exitPrice);
-    const qty = Number(tradeObj.quantity);
-    
-    const pnlValue = tradeObj.direction === "Long"? (exit-entry)*qty : (entry-exit)*qty;
-    pnl.innerText = pnlValue
-    if(pnlValue >= 0){
-      pnl.style.color = "rgba(0, 255, 0, 0.75)"
-    }else{
-      pnl.style.color = "orange"
+  if (trades.length === 0) {
+    document.querySelector(".analytics-info p").innerText = "Add trades !";
+  } else {
+    document.querySelector(".analytics-heading h3").innerText = "/ Trades";
+    const childrens = document.querySelector(".analytics-info").children;
+    const arrOfChild = Array.from(childrens);
+    for (let node of arrOfChild) {
+      node.remove();
     }
-    moreinfo.appendChild(pnl);
-    tradeCard.appendChild(moreinfo);
 
+    trades.forEach((tradeObj, index) => {
+      const tradeCard = document.createElement("div");
+      tradeCard.className = "trade-cards";
+      tradeCard.id = tradeObj.id;
 
-    const tradeOptions = document.createElement('div')
-    tradeOptions.className = "trade-options-btns"
-    tradeOptions.style.height = "100%";
-    tradeOptions.style.width = "100%";
-    tradeOptions.style.display = "flex";
-    tradeOptions.style.flexDirection = "column";
-    tradeOptions.style.justifyContent = "space-between";
+      const info = document.createElement("div");
+      info.className = "name-date";
+      info.style.height = "100%";
+      info.style.width = "100%";
+      info.style.display = "flex";
+      info.style.flexDirection = "column";
 
-    const editBnt = document.createElement('button')
-    editBnt.innerText = "Edit"
-    editBnt.style.backgroundColor = "#00eaff91"
-    tradeOptions.appendChild(editBnt)
+      const assetName = document.createElement("p");
+      assetName.innerText = tradeObj.assetName;
+      assetName.id = "asset-name";
+      assetName.style.margin = "0";
+      info.appendChild(assetName);
+      tradeCard.appendChild(info);
 
-    const deleteBnt = document.createElement('button')
-    deleteBnt.innerText = "Delete"
-    deleteBnt.style.backgroundColor = "#f44036"
+      const tradeDate = document.createElement("p");
+      tradeDate.innerText = tradeObj.date;
+      tradeDate.style.margin = "0";
+      tradeDate.style.fontSize = "0.8rem";
+      info.appendChild(tradeDate);
 
-    tradeOptions.appendChild(deleteBnt)
-    
-    tradeCard.appendChild(tradeOptions)
+      const moreinfo = document.createElement("div");
+      moreinfo.className = "more-info";
+      moreinfo.style.height = "100%";
+      moreinfo.style.width = "100%";
+      moreinfo.style.display = "flex";
+      moreinfo.style.flexDirection = "column";
 
-  
+      const tradeDirection = document.createElement("p");
+      tradeDirection.innerText = tradeObj.direction;
+      tradeDirection.style.margin = "0";
+      tradeDirection.style.fontSize = "0.8rem";
+      moreinfo.appendChild(tradeDirection);
 
-    document.querySelector(".analytics-info").appendChild(tradeCard);
-  });
+      const pnl = document.createElement("p");
+      pnl.style.margin = "0";
+      pnl.style.fontSize = "0.8rem";
+      const entry = Number(tradeObj.entryPrice);
+      const exit = Number(tradeObj.exitPrice);
+      const qty = Number(tradeObj.quantity);
+
+      const pnlValue =
+        tradeObj.direction === "Long"
+          ? (exit - entry) * qty
+          : (entry - exit) * qty;
+      pnl.innerText = pnlValue;
+      if (pnlValue >= 0) {
+        pnl.style.color = "rgba(0, 255, 0, 0.75)";
+      } else {
+        pnl.style.color = "orange";
+      }
+      moreinfo.appendChild(pnl);
+      tradeCard.appendChild(moreinfo);
+
+      const tradeOptions = document.createElement("div");
+      tradeOptions.className = "trade-options-btns";
+      tradeOptions.style.height = "100%";
+      tradeOptions.style.width = "100%";
+      tradeOptions.style.display = "flex";
+      tradeOptions.style.flexDirection = "column";
+      tradeOptions.style.justifyContent = "space-between";
+
+      const editBnt = document.createElement("button");
+      editBnt.innerText = "Edit";
+      editBnt.style.backgroundColor = "#00eaff91";
+      editBnt.onclick = () => showOnForm(tradeObj);
+      tradeOptions.appendChild(editBnt);
+
+      const deleteBnt = document.createElement("button");
+      deleteBnt.innerText = "Delete";
+      deleteBnt.className = "delete-trade";
+      deleteBnt.style.backgroundColor = "#f44036";
+      deleteBnt.onclick = () => deleteTrade(tradeObj.date, tradeObj.id);
+
+      tradeOptions.appendChild(deleteBnt);
+
+      tradeCard.appendChild(tradeOptions);
+
+      document.querySelector(".analytics-info").appendChild(tradeCard);
+    });
+  }
 }
 
 //-----------------------find trades by Date
 
-const findTrade = (...date) => {
-  const findByDate = trades.reduce((acc, val) => {
-    for (let tradeDate of date) {
-      if (val.date === tradeDate) {
+const findTrade = () => {
+  const filterDate = document.querySelector("#filter-date").value;
+  if (filterDate) {
+    let findByDate = trades.reduce((acc, val) => {
+      if (val.date === filterDate) {
         acc.push(val);
+        return acc;
       }
+      return acc
+             
+    }, []);
+    
+    if (findByDate.length == 0) {
+      alert("Trade not found !")
+    } else {
+      // for (let obj of findByDate) {
+      //   for (let [key, value] of Object.entries(obj)) {
+      //     console.log(`${key}:${value}`);
+      //   }
+      //   console.log("-------------------------------------");
+      // }
+    document.querySelector(".analytics-heading h3").innerText = "/ Trades";
+    const childrens = document.querySelector(".analytics-info").children;
+    const arrOfChild = Array.from(childrens);
+    for (let node of arrOfChild) {
+      node.remove();
     }
-    return acc;
-  }, []);
 
-  if (findByDate.length == 0) {
-    return "Trade Not Found !";
-  } else {
-    for (let obj of findByDate) {
-      for (let [key, value] of Object.entries(obj)) {
-        console.log(`${key}:${value}`);
+    findByDate.forEach((tradeObj, index) => {
+      const tradeCard = document.createElement("div");
+      tradeCard.className = "trade-cards";
+      tradeCard.id = tradeObj.id;
+
+      const info = document.createElement("div");
+      info.className = "name-date";
+      info.style.height = "100%";
+      info.style.width = "100%";
+      info.style.display = "flex";
+      info.style.flexDirection = "column";
+
+      const assetName = document.createElement("p");
+      assetName.innerText = tradeObj.assetName;
+      assetName.id = "asset-name";
+      assetName.style.margin = "0";
+      info.appendChild(assetName);
+      tradeCard.appendChild(info);
+
+      const tradeDate = document.createElement("p");
+      tradeDate.innerText = tradeObj.date;
+      tradeDate.style.margin = "0";
+      tradeDate.style.fontSize = "0.8rem";
+      info.appendChild(tradeDate);
+
+      const moreinfo = document.createElement("div");
+      moreinfo.className = "more-info";
+      moreinfo.style.height = "100%";
+      moreinfo.style.width = "100%";
+      moreinfo.style.display = "flex";
+      moreinfo.style.flexDirection = "column";
+
+      const tradeDirection = document.createElement("p");
+      tradeDirection.innerText = tradeObj.direction;
+      tradeDirection.style.margin = "0";
+      tradeDirection.style.fontSize = "0.8rem";
+      moreinfo.appendChild(tradeDirection);
+
+      const pnl = document.createElement("p");
+      pnl.style.margin = "0";
+      pnl.style.fontSize = "0.8rem";
+      const entry = Number(tradeObj.entryPrice);
+      const exit = Number(tradeObj.exitPrice);
+      const qty = Number(tradeObj.quantity);
+
+      const pnlValue =
+        tradeObj.direction === "Long"
+          ? (exit - entry) * qty
+          : (entry - exit) * qty;
+      pnl.innerText = pnlValue;
+      if (pnlValue >= 0) {
+        pnl.style.color = "rgba(0, 255, 0, 0.75)";
+      } else {
+        pnl.style.color = "orange";
       }
-      console.log("-------------------------------------");
+      moreinfo.appendChild(pnl);
+      tradeCard.appendChild(moreinfo);
+
+      const tradeOptions = document.createElement("div");
+      tradeOptions.className = "trade-options-btns";
+      tradeOptions.style.height = "100%";
+      tradeOptions.style.width = "100%";
+      tradeOptions.style.display = "flex";
+      tradeOptions.style.flexDirection = "column";
+      tradeOptions.style.justifyContent = "space-between";
+
+      const editBnt = document.createElement("button");
+      editBnt.innerText = "Edit";
+      editBnt.style.backgroundColor = "#00eaff91";
+      editBnt.onclick = () => showOnForm(tradeObj);
+      tradeOptions.appendChild(editBnt);
+
+      const deleteBnt = document.createElement("button");
+      deleteBnt.innerText = "Delete";
+      deleteBnt.className = "delete-trade";
+      deleteBnt.style.backgroundColor = "#f44036";
+      deleteBnt.onclick = () => deleteTrade(tradeObj.date, tradeObj.id);
+
+      tradeOptions.appendChild(deleteBnt);
+
+      tradeCard.appendChild(tradeOptions);
+
+      document.querySelector(".analytics-info").appendChild(tradeCard);
+    });
+
     }
+  }else{
+    alert("Select date !");
   }
 };
 
@@ -295,18 +402,15 @@ const deleteTrade = (date, id) => {
   let counter = 0;
   let deletedTrades = [];
   for (let key = trades.length - 1; key >= 0; key--) {
-    if (date && !id && trades[key].date == date) {
-      // console.log("true condition 1",trades[key].id);
-      deletedTrades.push(trades.splice(key, 1));
-      counter++;
-    } else if (date && id && trades[key].date == date && trades[key].id == id) {
+    if (date && id && trades[key].date == date && trades[key].id == id) {
       //  console.log("true condition 2");
       deletedTrades.push(trades.splice(key, 1));
       counter++;
     }
   }
   if (counter) {
-    console.log("Trade deleted successfully !", deletedTrades);
+    alert("Trade deleted successfully !");
+    document.getElementById(id).remove();
   } else {
     console.log("Trade not found !");
   }
@@ -315,7 +419,44 @@ const deleteTrade = (date, id) => {
 // deleteTrade("2026-8-6")
 
 // ------------------------Update existing trades
-const updateTrade = (trade) => {
+const showOnForm = (tradeObj) => {
+  console.log(tradeObj);
+  document.querySelector("form h3").innerText = "/ Edit Your Trade";
+
+  document.querySelector("#select-date").value = tradeObj.date;
+  document.querySelector("#select-asset").value = tradeObj.asset;
+  document.querySelector("#select-style").value = tradeObj.style;
+  document.querySelector("#select-TF").value = tradeObj.timeFrame;
+  document.querySelector("#select-asset-name").value = tradeObj.assetName;
+  document.querySelector("#select-direction").value = tradeObj.direction;
+  document.querySelector("#entry-price").value = tradeObj.entryPrice;
+  document.querySelector("#exit-price").value = tradeObj.exitPrice;
+  document.querySelector("#enter-qnt").value = tradeObj.quantity;
+  document.querySelector("#add-context").value = tradeObj.context;
+  document.querySelector("#file-upload").files[0];
+
+  const updateBtn = document.querySelector(".row-6 input");
+  updateBtn.value = "Update";
+  updateBtn.onclick = () => updateTrade(tradeObj.id);
+};
+
+const updateTrade = (tradeId) => {
+  const trade = {
+    id: tradeId,
+    date: document.querySelector("#select-date").value,
+    asset: document.querySelector("#select-asset").value,
+    style: document.querySelector("#select-style").value,
+    timeFrame: document.querySelector("#select-TF").value,
+    assetName: document.querySelector("#select-asset-name").value,
+    direction: document.querySelector("#select-direction").value,
+    entryPrice: document.querySelector("#entry-price").value,
+    exitPrice: document.querySelector("#exit-price").value,
+    quantity: document.querySelector("#enter-qnt").value,
+    context: document.querySelector("#add-context").value,
+    screenshot: document.querySelector("#file-upload").files[0],
+  };
+  console.log(trade);
+
   let isExist = false;
   if (trade.id) {
     for (let obj of trades) {
@@ -330,9 +471,16 @@ const updateTrade = (trade) => {
     console.log("Enter trade id");
   }
   if (isExist) {
-    console.log("Trade updated successfully !");
+    // console.log("Trade updated successfully !");
+    alert("Trade updated successfully !");
+    document.querySelector("form").reset();
+
+    const addBtn = document.querySelector(".row-6 input");
+    addBtn.value = "Add Trade";
+    addBtn.onclick = () => addTrade();
   } else {
-    console.log("Give Id does not exist !");
+    // console.log("Given Id does not exist !",trade);
+    alert("Given Id does not exist !");
   }
 };
 // updateTrade({ id:1, assetName:"Mahindra Motors", asset:"Equity", entryPrice:1780, exitPrice:2000 });
