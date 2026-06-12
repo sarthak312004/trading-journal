@@ -55,6 +55,7 @@ main form {
   grid-template-rows: repeat(7, 1fr);
   align-items: center;
   row-gap: 10px;
+  overflow-x:hidden; 
 }
 form h3 {
   margin: 0;
@@ -154,7 +155,9 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   margin-right: 10%;
   font-family: var(--def-heading-font-family);
   display: flex;
+  overflow-x:hidden; 
   flex-direction: column;
+  position: relative;
 }
 .analytics-heading {
   flex-shrink: 0;
@@ -181,6 +184,7 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   padding-left: 5%;
   padding-right: 5%;
 }
+
 .analytics-heading button:hover{
   background-color: rgba(245, 245, 245, 0.468);
 }
@@ -192,6 +196,46 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   flex-direction: column;
   overflow-y: auto;
   margin-top: 10px;
+  align-items: center;
+
+}
+
+ #analyse-btn{
+  background-color: rgba(111, 80, 205, 0.902);
+  color: white;
+  font-family: var(--def-heading-font-family);
+  border-radius: 8px;
+  width: 50%;
+  height: 30px;
+  border: none;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.after-display-analyse-btn{
+  background-color: rgb(111, 80, 205);
+  color: white;
+  font-family: var(--def-heading-font-family);
+  border-radius: 8px;
+  width: 100px;
+  height: 30px;
+  border: none;
+  font-weight: 500;
+  opacity: 1;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px 5px rgb(25, 25, 25) ;
+}
+.after-display-analyse-btn:hover{
+  opacity: 0.9;
+}
+.analytics-info #analyse-btn:hover{
+  opacity: 1;
+}
+.stat-card{
+  height: auto;
+  width: 100%;
 }
 .analytics-info .trade-cards{
   background-color: #d6edff21;
