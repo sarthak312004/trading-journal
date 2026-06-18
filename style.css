@@ -74,7 +74,7 @@ select {
   width: 200px;
   background-color: #c1c1c1a9;
   border: 1px solid rgb(155, 172, 191);
-  border-radius: 20px;
+  border-radius: 8px;
   font-family: var(--def-heading-font-family);
   text-align: center;
   box-sizing: border-box;
@@ -100,7 +100,7 @@ form textarea {
   width: 420px;
   background-color: #c1c1c1a9;
   border: 1px solid rgb(155, 172, 191);
-  border-radius: 20px;
+  border-radius: 8px;
   font-family: var(--def-heading-font-family);
   padding-left: 20px;
   box-sizing: border-box;
@@ -169,7 +169,7 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   font-family: var(--def-heading-font-family);
   background-color: rgba(245, 245, 245, 0.317);
   border: none;
-  border-radius: 15px;
+  border-radius: 7px;
   font-size: 0.8rem;
   text-align: center;
   width: 40%;
@@ -178,7 +178,7 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   font-family: var(--def-heading-font-family);
   background-color: rgba(245, 245, 245, 0.317);
   border: none;
-  border-radius: 15px;
+  border-radius: 7px;
   font-size: 0.8rem;
   text-align: center;
   padding-left: 5%;
@@ -364,7 +364,6 @@ form .row-6 input:nth-child(2), .row-6 input:last-child{
   form input,
   select {
     height: 44px;
-    border-radius: 14px;
     font-size: 0.85rem;
   }
   form textarea {
